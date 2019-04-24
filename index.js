@@ -29,7 +29,7 @@ app.get("/listings/:id", (req, res) => {
       });
 
       response.on("end", () => {
-        res.status(200).json(output.toString("utf8"));
+        res.status(200).json(JSON.parse(output));
       });
     }
   );
