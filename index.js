@@ -35,6 +35,26 @@ app.get("/listings/:id", (req, res) => {
   );
 });
 
+app.get("/listings/:id/images", (req, res) => {
+  const id = req.params.id;
+  https.get(
+    `https://openapi.etsy.com/v2/listings/${id}/images?api_key=${
+      process.env.ETSY_KEY
+    }`,
+    response => {
+      let output = "";
+
+      response.on("data", data => {
+        output += data;
+      });
+
+      response.on("end", () => {
+        res.status(200).json(JSON.parse(output));
+      });
+    }
+  );
+});
+
 const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
