@@ -12,3 +12,4 @@ existing routes:
 
 - single listing: GET `listings/:id`
 - images for single listing: GET `listings/:id/images`
+- lists for store: GET `/shops/:id/listings`

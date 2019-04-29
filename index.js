@@ -15,6 +15,26 @@ app.use(
 );
 app.use(cors());
 
+app.get("/shops/:id/listings", (req, res) => {
+  const id = req.params.id;
+  https.get(
+    `https://openapi.etsy.com/v2/shops/${id}/listings/active?api_key=${
+      process.env.ETSY_KEY
+    }`,
+    response => {
+      let output = "";
+
+      response.on("data", data => {
+        output += data;
+      });
+
+      response.on("end", () => {
+        res.status(200).json(JSON.parse(output));
+      });
+    }
+  );
+});
+
 app.get("/listings/:id", (req, res) => {
   const id = req.params.id;
   https.get(
