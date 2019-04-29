@@ -35,10 +35,10 @@ app.get("/listings/:id", (req, res) => {
   );
 });
 
-app.get("/listings/:id/images", (req, res) => {
+app.get("/listings/:id", (req, res) => {
   const id = req.params.id;
   https.get(
-    `https://openapi.etsy.com/v2/listings/${id}/images?api_key=${
+    `https://openapi.etsy.com/v2/listings/${id}?api_key=${
       process.env.ETSY_KEY
     }`,
     response => {
